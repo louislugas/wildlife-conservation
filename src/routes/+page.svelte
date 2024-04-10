@@ -15,20 +15,31 @@
   let bottom = 0.9;
 
   let zoom = 0;
+  let open = false
 
   $: zoom = progress * 50;
-  $: if (id) {
-	dialog.showModal()
+  $: if (open) {
+	  dialog.showModal()
   }
 
   function close() {
-	dialog.close()
-	
+    open = false
+	  dialog.close()
   }
 </script>
 
 <dialog bind:this={dialog}>
-	<h1>Lorem Ipsum {id}</h1>
+	<h1>
+    {
+      id == 1 ? "Ashy Tailorbird" :
+      id == 2 ? "Yellow Vented Bulbul" :
+      id == 3 ? "Common Grey Magpie" :
+      id == 4 ? "Green Leafbird" :
+      id == 5 ? "Straw Headed Bulbul" :
+      id == 6 ? "Bali Myna" :
+      id == 7 ? "Javan Pied Starling" : ""
+    }
+  </h1>
 	<button on:click={close}>Close</button>
 	<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minus tenetur cumque adipisci numquam in quidem quis veniam sequi placeat quos facere a enim nulla quaerat perspiciatis totam, et tempora cum.</p>
 	<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minus tenetur cumque adipisci numquam in quidem quis veniam sequi placeat quos facere a enim nulla quaerat perspiciatis totam, et tempora cum.</p>
@@ -53,21 +64,26 @@
 		style:height="100vh"
 		style:padding="0"
 	>
-		<img src="./images/background-test-resize.png" alt="background">
+		<img src="./images/background-export.png" alt="background">
 		<!-- <img src="./images/checker-01.png" alt="background"> -->
 	</section>
     <section class="three-section">
       <Canvas>
-        <Scene bind:zoom bind:id />
+        <Scene bind:zoom bind:id bind:open/>
       </Canvas>
     </section>
   </div>
 
   <div slot="foreground">
-    {#each Array(5) as _, i}
+    {#each Array(7) as _, i}
       <section>
-        {index + 1}<br />{progress}<br />{(i * 1) / 5}<br />{(i * 1) / 5 +
-          1 / 5}
+        {index + 1}
+        <br>
+        {progress}
+        <br>
+        {progress / 7}
+        <br>
+        {offset}
       </section>
     {/each}
   </div>
@@ -82,6 +98,11 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+  }
+  img {
+    width:100%;
+    height:100%;
+    object-fit: cover;
   }
   :global(body) {
     margin: 0;
