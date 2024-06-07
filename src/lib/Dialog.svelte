@@ -31,7 +31,7 @@ export let id = 1
             <p>{bird[id-1].iucn}</p>
         </div>
         <div class="cites">
-            <p>Cites</p>
+            <p>CITES Status</p>
             <p>{bird[id-1].cites}</p>
         </div>
         <div class="protect">
@@ -123,7 +123,7 @@ export let id = 1
     }
     .desc {
         height:30vh;
-        overflow-y: scroll;
+        overflow-y: auto;
     }
     .desc::-webkit-scrollbar {
         width: 0.5rem;
