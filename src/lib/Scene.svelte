@@ -1,6 +1,7 @@
 <script>
 	import { T } from '@threlte/core'
 	import { Billboard, useTexture, interactivity, useCursor  } from '@threlte/extras'
+  import Cage from './Cage.svelte';
 
   export let open = false
 
@@ -46,6 +47,8 @@
   }}
 />
 
+<Cage />
+
 <!-- Light -->
 <T.RectAreaLight 
 	width="30" 
@@ -54,6 +57,8 @@
 	intensity="2"
 	position.y={4}
 	rotation.x={-90*rad}/> -->
+
+
 
 <!-- position ={[x,y,z]} -->
 <!-- x = left-right -->
