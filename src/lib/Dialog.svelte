@@ -1,5 +1,7 @@
 <script>
+import {bird} from '$lib/bird'
 export let id = 1
+
 </script>
     <div class="bird-header">
         <div class="inner-header">
@@ -9,27 +11,9 @@ export let id = 1
                 </div>
             </div>
             <div class="right">
-                <h2>
-                {
-                    id == 1
-                    ? "Ashy Tailorbird"
-                    : id == 2
-                    ? "Yellow Vented Bulbul"
-                    : id == 3
-                    ? "Common Grey Magpie"
-                    : id == 4
-                    ? "Green Leafbird"
-                    : id == 5
-                    ? "Straw Headed Bulbul"
-                    : id == 6
-                    ? "Bali Myna"
-                    : id == 7
-                    ? "Javan Pied Starling"
-                    : ""
-                }
-            </h2>
-            <h3>Indonesian Name</h3>
-            <h3><em>Latin Name</em></h3>
+                <h2>{bird[id-1].name.english}</h2>
+                <h3>{bird[id-1].name.indonesian}</h3>
+                <h3><em>{bird[id-1].name.latin}</em></h3>
             </div>
         
         </div>
@@ -44,29 +28,22 @@ export let id = 1
     <div class="midpiece">
         <div class="iucn">
             <p>IUCN Status</p>
-            <p>Lorem ipsum</p>
+            <p>{bird[id-1].iucn}</p>
         </div>
         <div class="cites">
             <p>Cites</p>
-            <p>Lorem ipsum</p>
+            <p>{bird[id-1].cites}</p>
         </div>
         <div class="protect">
             <p>Indonesian Protection Status</p>
-            <p>Lorem ipsum</p>
+            <p>{bird[id-1].indoprotect}</p>
         </div>
     </div>
-    
-    
-    <p>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minus tenetur
-        cumque adipisci numquam in quidem quis veniam sequi placeat quos facere a
-        enim nulla quaerat perspiciatis totam, et tempora cum.
-    </p>
-    <p>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minus tenetur
-        cumque adipisci numquam in quidem quis veniam sequi placeat quos facere a
-        enim nulla quaerat perspiciatis totam, et tempora cum.
-    </p>
+    <div class="desc">
+        {#each bird[id-1].desc as p}
+            <p>{@html p}</p>
+        {/each}
+    </div>
 </section>
 
 <style>
@@ -90,7 +67,7 @@ export let id = 1
         display: flex;
         justify-content: center;
         position: absolute;
-        top:29%;
+        top:23%;
         left:0%;
         width:100%;
     }
@@ -107,9 +84,12 @@ export let id = 1
     .midpiece > div {
         width:30%;
     }
+    .midpiece > div > p {
+        line-height: 1rem;
+    }
     .midpiece > div > p:first-child {
         font-weight: 600;
-        height:30px;
+        height:35px;
     }
     .left {
         width:20%;
@@ -141,6 +121,19 @@ export let id = 1
     .bird-image > div {
         width:70%;
     }
+    .desc {
+        height:30vh;
+        overflow-y: scroll;
+    }
+    .desc::-webkit-scrollbar {
+        width: 0.5rem;
+        
+    }    
+    .desc::-webkit-scrollbar-thumb {
+        background-color: darkgrey;
+        border-radius: 0.5rem;
+    }
+
     @media only screen and (max-width:500px) {
         .right > h2 {
             font-size:1.1rem;
@@ -157,7 +150,7 @@ export let id = 1
             font-size: 0.9rem;
         }
         .audio {
-            top:22%;
+            top:26%;
         }
         p {
             font-size: 0.9rem;
