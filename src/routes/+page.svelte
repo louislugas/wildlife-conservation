@@ -6,9 +6,9 @@
     import { Canvas } from "@threlte/core";
     import Scene from "$lib/Scene.svelte";
     import Title from "$lib/Title.svelte";
-  import Dialog from "$lib/Dialog.svelte";
+    import Dialog from "$lib/Dialog.svelte";
 
-    let id, dialog;
+    let id, dialog, select;
 
     let count;
     let index;
@@ -30,7 +30,7 @@
     $: if (index < 3) {
         zoom = 0;
     } else {
-        zoom = scaleProgress(progress) * 50;
+        zoom = scaleProgress(progress) * 90;
     }
     $: if (open) {
         dialog.showModal();
@@ -53,7 +53,7 @@
 
 <dialog bind:this={dialog}>
     <button on:click={close}>×</button>
-    <Dialog bind:id/>
+    <Dialog bind:select/>
 </dialog>
 
 <Scroller
@@ -65,11 +65,11 @@
     bind:offset
     bind:progress
     >
-    <div slot="background">
-        <section class="background-section">
-        <div class="vignette"></div>
-        <img src="./images/background-export.png" alt="background" style:opacity={0.3}/>
-        <!-- <img src="./images/checker-01.png" alt="background"> -->
+    <div slot="background" >
+        <section class="background-section" style:opacity={progress > 1 ? 0 : 1}>
+            <div class="vignette"></div>
+            <img src="./images/background-export.png" alt="background" style:opacity={0.3}/>
+            <!-- <img src="./images/checker-01.png" alt="background"> -->
         </section>
 
         <section
@@ -79,13 +79,15 @@
         style:top="{progress * -500}px"
         style:flex-direction="column"
         >
-        <Title bind:progress />
+            <Title bind:progress />
         </section>
 
-        <section class="three-section background-section">
-        <Canvas>
-            <Scene bind:zoom bind:id bind:open />
-        </Canvas>
+        <section class="three-section background-section"
+            style:opacity={progress > 1 ? 0 : 1}
+            >
+            <Canvas>
+                <Scene bind:zoom bind:open bind:select/>
+            </Canvas>
         </section>
     </div>
 
@@ -104,6 +106,18 @@
     </div>
 </Scroller>
 
+<div style:width="88%" style:margin="0 auto" style:max-width="650px" style:margin-bottom="8rem">
+    <p style:color="white">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore ducimus maxime libero eveniet et ab sequi fugit! Tenetur autem qui, quasi, at perspiciatis sapiente amet est id earum maxime exercitationem.</p>
+
+    <p style:color="white">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat esse dignissimos ullam eum molestiae, tempora itaque iure sit obcaecati tempore rem deleniti ut nihil optio voluptatibus eligendi. Illum repellat dignissimos corporis ab excepturi non minus animi eligendi reiciendis itaque ipsa, quasi aperiam tempora, fuga ratione porro libero maiores sit quibusdam!</p>
+
+    <p style:color="white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus vero laborum quod accusantium officia incidunt!</p>
+
+    <p style:color="white">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit optio nostrum mollitia eius, alias ducimus sit animi repellat quod incidunt voluptatum nisi amet accusamus minus eos non necessitatibus? Consectetur, impedit? Aperiam perferendis tempore neque quasi quod voluptas vero ducimus voluptate mollitia eius officiis, eos architecto odit ea qui perspiciatis ratione, eaque exercitationem rerum sunt similique alias quibusdam! Voluptatum, atque reprehenderit.</p>
+
+</div>
+
+
 <style>
     * {
         -webkit-tap-highlight-color: transparent;
@@ -113,6 +127,11 @@
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none;
+    }
+    p {
+        color:white;
+        font-family: sans-serif;
+        line-height: 1.5rem;
     }
     img {
         width: 100%;
@@ -132,6 +151,7 @@
         width: 100vw;
         height: 100vh;
         padding: 0;
+        transition:opacity 500ms ease-in-out;
     }
     .intro {
         z-index: 10;
@@ -147,6 +167,7 @@
         font-size: 1.4em;
         overflow: hidden;
         width: 100vw;
+        
     }
 
     [slot="foreground"] {

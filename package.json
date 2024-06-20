@@ -23,9 +23,10 @@
 		"@fortawesome/free-solid-svg-icons": "^6.5.2",
 		"@sveltejs/svelte-scroller": "^2.0.7",
 		"@threlte/core": "^7.1.2",
-		"@threlte/extras": "^8.8.1",
+		"@threlte/extras": "^8.11.3",
 		"d3": "^7.9.0",
 		"svelte-fa": "^4.0.2",
-		"three": "^0.152.0"
+		"three": "^0.152.0",
+		"three-bvh-csg": "^0.0.16"
 	}
 }

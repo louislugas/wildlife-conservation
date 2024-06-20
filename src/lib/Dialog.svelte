@@ -1,6 +1,6 @@
 <script>
 import {bird} from '$lib/bird'
-export let id = 1
+export let select = 1
 
 </script>
     <div class="bird-header">
@@ -11,9 +11,9 @@ export let id = 1
                 </div>
             </div>
             <div class="right">
-                <h2>{bird[id-1].name.english}</h2>
-                <h3>{bird[id-1].name.indonesian}</h3>
-                <h3><em>{bird[id-1].name.latin}</em></h3>
+                <h2>{bird[select-1].name.english}</h2>
+                <h3>{bird[select-1].name.indonesian}</h3>
+                <h3><em>{bird[select-1].name.latin}</em></h3>
             </div>
         
         </div>
@@ -21,26 +21,26 @@ export let id = 1
 <section>
     <div class="audio">
         <audio controls>
-            <source src="horse.mp3" type="audio/mpeg">
+            <source src="" type="audio/mpeg">
             Your browser does not support the audio element.
         </audio>
     </div>
     <div class="midpiece">
         <div class="iucn">
             <p>IUCN Status</p>
-            <p>{bird[id-1].iucn}</p>
+            <p>{bird[select-1].iucn}</p>
         </div>
         <div class="cites">
             <p>CITES Status</p>
-            <p>{bird[id-1].cites}</p>
+            <p>{bird[select-1].cites}</p>
         </div>
         <div class="protect">
             <p>Indonesian Protection Status</p>
-            <p>{bird[id-1].indoprotect}</p>
+            <p>{bird[select-1].indoprotect}</p>
         </div>
     </div>
     <div class="desc">
-        {#each bird[id-1].desc as p}
+        {#each bird[select-1].desc as p}
             <p>{@html p}</p>
         {/each}
     </div>
