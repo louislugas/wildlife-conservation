@@ -10,8 +10,9 @@
 
 <style>
     .scroll {
-		position: absolute;
-		bottom: 10rem;
+		/* border: 1px solid red; */
+		/* position: absolute;
+		bottom: 0; */
 		width:100%;
 		color:#f5f5f5;
 		padding-top:2rem;

@@ -6,28 +6,45 @@
     import { Canvas } from "@threlte/core";
     import Scene from "$lib/Scene.svelte";
     import Title from "$lib/Title.svelte";
+    import End from "$lib/End.svelte";
     import Dialog from "$lib/Dialog.svelte";
+    import Scroll from "$lib/Scroll.svelte";
+    import {onMount} from "svelte"
 
+    import Fa from "svelte-fa"
+    import { faVolumeMute, faVolumeUp } from "@fortawesome/free-solid-svg-icons";
+
+    import bgMarketAudio from "$lib/audio/bg_audio_marketplace.mp3"
+    
+
+    let interact = false
+    let playedOnce = false
     let id, dialog, select;
 
+    let lang = "en"
+
     let count;
-    let index;
-    let offset;
-    let progress;
+    let index = 0;
+    let offset = 0.75;
+    let progress = 0;
     let top = 0;
     let threshold = 0.8;
     let bottom = 0.9;
+
+    let audio = false
+    let bgAudio
+
 
     let zoom = 0;
     let open = false;
 
     let scaleProgress = d3
         .scaleLinear()
-        .domain([0.3, 1])
+        .domain([0.2, 1])
         .range([0, 1])
         .clamp(true);
 
-    $: if (index < 3) {
+    $: if (index < 1) {
         zoom = 0;
     } else {
         zoom = scaleProgress(progress) * 90;
@@ -36,11 +53,35 @@
         dialog.showModal();
     }
 
+    $: if (index > 1 && progress < 1 && interact) {
+        if (!playedOnce) {
+            playedOnce = true
+            audio = true
+        }
+    } else {
+        audio = false
+    }
+
+    $: if (progress > 1) {
+        audio = false
+    }
+
+    $: if (bgAudio) {
+        bgAudio.volume = 0.5
+        if (audio) {
+            bgAudio.play()
+        } else if (!audio) {
+            bgAudio.pause()
+        }
+    }
+
     function close() {
         open = false;
         dialog.close();
     }
 </script>   
+
+<svelte:body on:click={() => {interact = true}}></svelte:body>
 
 <svelte:head>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -53,8 +94,13 @@
 
 <dialog bind:this={dialog}>
     <button on:click={close}>×</button>
-    <Dialog bind:select/>
+    <Dialog bind:select bind:lang/>
 </dialog>
+
+<Title bind:lang/>
+
+
+
 
 <Scroller
     {top}
@@ -72,14 +118,27 @@
             <!-- <img src="./images/checker-01.png" alt="background"> -->
         </section>
 
-        <section
-        class="intro background-section"
-        style:opacity={progress < 0.15 ? 1 : 0}
-        style:display={progress < 0.2 ? "flex" : "none"}
-        style:top="{progress * -500}px"
-        style:flex-direction="column"
+        <section class="ambiance background-section"
+            style:opacity={progress < 1 ? 1 : 0}
+            >
+            <button class="volume" on:click={() => {audio = !audio}}>
+            <Fa icon={audio ? faVolumeUp : faVolumeMute} color="#141414" scale="0.8"/>
+            </button>
+            <audio bind:this={bgAudio} loop src={bgMarketAudio}></audio>
+        </section>
+
+        <section class="cover background-section"
+            style:opacity={index > 1 ? 0 : 1}
+            >
+        </section>
+        <section class="background-section"
+            style:opacity={progress > 1 ? 0 : 1}
+            style:z-index={10}
+            style:pointer-events="none"
+            style:display="flex"
+            style:align-items="flex-end"
         >
-            <Title bind:progress />
+            <Scroll />
         </section>
 
         <section class="three-section background-section"
@@ -92,7 +151,7 @@
     </div>
 
     <div slot="foreground">
-        {#each Array(10) as _, i}
+        {#each Array(15) as _, i}
         <section>
             <!-- {index + 1}
             <br>
@@ -106,16 +165,9 @@
     </div>
 </Scroller>
 
-<div style:width="88%" style:margin="0 auto" style:max-width="650px" style:margin-bottom="8rem">
-    <p style:color="white">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolore ducimus maxime libero eveniet et ab sequi fugit! Tenetur autem qui, quasi, at perspiciatis sapiente amet est id earum maxime exercitationem.</p>
+<End bind:lang/>
 
-    <p style:color="white">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat esse dignissimos ullam eum molestiae, tempora itaque iure sit obcaecati tempore rem deleniti ut nihil optio voluptatibus eligendi. Illum repellat dignissimos corporis ab excepturi non minus animi eligendi reiciendis itaque ipsa, quasi aperiam tempora, fuga ratione porro libero maiores sit quibusdam!</p>
 
-    <p style:color="white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus vero laborum quod accusantium officia incidunt!</p>
-
-    <p style:color="white">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit optio nostrum mollitia eius, alias ducimus sit animi repellat quod incidunt voluptatum nisi amet accusamus minus eos non necessitatibus? Consectetur, impedit? Aperiam perferendis tempore neque quasi quod voluptas vero ducimus voluptate mollitia eius officiis, eos architecto odit ea qui perspiciatis ratione, eaque exercitationem rerum sunt similique alias quibusdam! Voluptatum, atque reprehenderit.</p>
-
-</div>
 
 
 <style>
@@ -128,11 +180,7 @@
         -ms-user-select: none;
         user-select: none;
     }
-    p {
-        color:white;
-        font-family: sans-serif;
-        line-height: 1.5rem;
-    }
+    
     img {
         width: 100%;
         height: 100%;
@@ -153,12 +201,35 @@
         padding: 0;
         transition:opacity 500ms ease-in-out;
     }
+    
     .intro {
         z-index: 10;
-        font-family: sans-serif;
-        background: linear-gradient(black 75%, transparent 110%);
-        height: 120vh;
-        transition: opacity 500ms ease-in-out;
+        /* font-family: sans-serif; */
+        /* background: black; */
+        width:100%;
+        justify-content: center;
+        /* transition: opacity 500ms ease-in-out; */
+        /* position: absolute; */
+        
+       
+    }
+    .cover {
+        background-image: linear-gradient(black 75%, transparent);
+        width:100%;
+        height:100vh;
+        z-index: 10;
+        pointer-events: none;
+        /* border:1px solid red; */
+    }
+    .ambiance {   
+        width:100%;
+        height:100vh;
+        z-index: 11;
+        pointer-events: none;
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-start;
+        /* border:1px solid red; */
     }
     [slot="background"] {
         /* background-color: rgba(255, 62, 0, 0.05); */
@@ -189,7 +260,7 @@
         pointer-events: auto;
     }
     section {
-        height: 80vh;
+        height: 100vh;
         /* background-color: rgba(0, 0, 0, 0.5); */
         color: white;
         padding: 1em;
@@ -277,5 +348,16 @@
         color:#f5f5f5;
         cursor:pointer;
         font-size: 2rem;
+    }
+    .volume {
+        position:relative;
+        background-color:#f5f5f5;
+        aspect-ratio: 1;
+        border-radius:1rem;
+        margin-top:1rem;
+        margin-right:1rem;
+        width:4rem;
+        pointer-events: auto;
+        cursor: pointer;
     }
 </style>

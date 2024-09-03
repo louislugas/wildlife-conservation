@@ -26,7 +26,7 @@
     let rad = Math.PI/180
 
     let thick = 0.02
-    let ribcount = 8
+    let ribcount = 5
 
     let ribsX = width/(ribcount)
     let ribsZ = depth/(ribcount)

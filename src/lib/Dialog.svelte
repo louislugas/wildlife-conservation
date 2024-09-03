@@ -1,46 +1,78 @@
 <script>
 import {bird} from '$lib/bird'
 export let select = 1
+export let lang
+export let lselect = 0
+
+$: if(lang == "en") {
+        lselect = 0
+    } else {
+        lselect = 1
+    }
+
+import ashytailorbird from '$lib/images/pp_ashy_tailorbird.jpg'
+import yellowventedbulbul from '$lib/images/pp_yellow_vented_bulbul.jpg'
+import commongreenmagpie from '$lib/images/pp_common_green_magpie.jpg'
+import greatergreenleafbird from '$lib/images/pp_greater_green_leafbird.jpg'
+import strawheadedbulbul from '$lib/images/pp_straw_headed_bulbul.jpg'
+import balimyna from '$lib/images/pp_bali_myna.jpg'
+import javanpiedstarling from '$lib/images/pp_javan_pied_starling.jpg'
+
+let imgArr = [
+    ashytailorbird, 
+    yellowventedbulbul, 
+    commongreenmagpie, 
+    greatergreenleafbird,
+    strawheadedbulbul,
+    balimyna,
+    javanpiedstarling
+    ]
 
 </script>
-    <div class="bird-header">
+    <div class="bird-header" style:background-image="linear-gradient({bird[select-1].color}, transparent)">
         <div class="inner-header">
             <div class="left">
-                <div class="bird-image">
-                    <div>Bird image here</div>
+                <div class="bird-image"
+                    style:border-color="{
+                    bird[select-1].color == "green" ? "lightgreen" : 
+                    bird[select-1].color == "orange" ? "gold" : 
+                    "coral" 
+                    }"
+                >
+                    <img src={imgArr[select-1]} alt="{bird[select-1].name.english} - {bird[select-1].name.indonesian}">
                 </div>
             </div>
             <div class="right">
-                <h2>{bird[select-1].name.english}</h2>
-                <h3>{bird[select-1].name.indonesian}</h3>
+                <h2>{lang == "en" ? bird[select-1].name.english : bird[select-1].name.indonesian}</h2>
+                <h3>{lang == "en" ? bird[select-1].name.indonesian : bird[select-1].name.english}</h3>
                 <h3><em>{bird[select-1].name.latin}</em></h3>
             </div>
         
         </div>
     </div>
 <section>
-    <div class="audio">
+    <!-- <div class="audio">
         <audio controls>
             <source src="" type="audio/mpeg">
             Your browser does not support the audio element.
         </audio>
-    </div>
+    </div> -->
     <div class="midpiece">
         <div class="iucn">
             <p>IUCN Status</p>
-            <p>{bird[select-1].iucn}</p>
+            <p>{bird[select-1].iucn[lselect]}</p>
         </div>
         <div class="cites">
             <p>CITES Status</p>
-            <p>{bird[select-1].cites}</p>
+            <p>{bird[select-1].cites[lselect]}</p>
         </div>
         <div class="protect">
             <p>Indonesian Protection Status</p>
-            <p>{bird[select-1].indoprotect}</p>
+            <p>{bird[select-1].indoprotect[lselect]}</p>
         </div>
     </div>
     <div class="desc">
-        {#each bird[select-1].desc as p}
+        {#each bird[select-1].desc[lselect] as p}
             <p>{@html p}</p>
         {/each}
     </div>
@@ -52,6 +84,7 @@ export let select = 1
     }
     p {
         font-family: "Quicksand", sans-serif;
+        line-height: 1.8rem;
     }
     .inner-header {
         margin:1rem;
@@ -61,7 +94,6 @@ export let select = 1
     .bird-header {
         display: flex;
         margin-bottom: 1rem;
-        background-image: linear-gradient(green, transparent);
     }
     .audio {
         display: flex;
@@ -76,7 +108,7 @@ export let select = 1
         max-width:250px;
     }
     .midpiece {
-        margin-top:3rem;
+        margin-top:1rem;
         display: flex;
         justify-content: space-evenly;
         text-align: center;
@@ -109,7 +141,7 @@ export let select = 1
     .bird-image {
         width:100%;
         aspect-ratio: 1;
-        background-color:coral;
+        /* background-color:coral; */
         border-radius: 50%;
         text-align: center;
         display: flex;
@@ -117,9 +149,13 @@ export let select = 1
         align-items: center;
         color:black;
         font-family: sans-serif;
+        overflow: hidden;
+        border-width: 3px;
+        border-style: solid;
     }
-    .bird-image > div {
-        width:70%;
+    .bird-image > img {
+        width:100%;
+        aspect-ratio: 1;
     }
     .desc {
         height:30vh;
@@ -132,6 +168,19 @@ export let select = 1
     .desc::-webkit-scrollbar-thumb {
         background-color: darkgrey;
         border-radius: 0.5rem;
+    }
+
+    :global(strong) {
+        color:rgb(255, 233, 145);
+    }
+
+    :global(a) {
+        color:gold;
+        font-weight:600;
+    }
+
+    :global(a:visited) {
+        color:gold;
     }
 
     @media only screen and (max-width:500px) {
