@@ -80,7 +80,7 @@
         <br>
         <br>
         <p>
-            Proyek ini dibuat berdasarkan riset doktoral yang dilakukan oleh Sicily Fiennes. Sicily berkolaborasi dengan Ishaan Patil untuk membuat ilustrasi, dan Louis Lugas untuk membuat website. Proyek ini didukung oleh Creature Conserve dan Pardicolor. Apabila anda memiliki pertanyaan mengenai proyek atau riset ini, silakan kontak <a target='_blank' class='link-article' href='mailto:sicilyfiennes@gmail.com'>Sicily Fiennes <Fa icon={faEnvelope}/></a>, <a target='_blank' class='link-article' href='mailto:ishaan.patil27@gmail.com'>Ishaan Patil <Fa icon={faEnvelope}/></a>atau <a target='_blank' class='link-article' href='mailto:louislugas@gmail.com'>Louis Lugas <Fa icon={faEnvelope}/></a>.
+            Proyek ini dibuat berdasarkan riset doktoral yang dilakukan oleh Sicily Fiennes. Sicily berkolaborasi dengan Ishaan Patil untuk membuat ilustrasi, dan Louis Lugas untuk membuat website. Proyek ini didukung oleh Creature Conserve dan Pardicolor. Apabila anda memiliki pertanyaan mengenai proyek atau riset ini, silakan kontak <a target='_blank' class='link-article' href='mailto:sicilyfiennes@gmail.com'>Sicily Fiennes <Fa icon={faEnvelope}/></a>, <a target='_blank' class='link-article' href='mailto:ishaan.patil27@gmail.com'>Ishaan Patil <Fa icon={faEnvelope}/></a> atau <a target='_blank' class='link-article' href='mailto:louislugas@gmail.com'>Louis Lugas <Fa icon={faEnvelope}/></a>.
         </p>
         <p>Jika Anda ingin memberikan kesan dan pesan tentang pengalaman anda di situs web ini, klik <a target='_blank' class='link-article' href='https://forms.gle/pUX2B3YYVMtcAjuS7'>tautan</a> ini untuk mengisi formulir.</p>
     {/if}

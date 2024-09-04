@@ -48,19 +48,19 @@ export let bird = [
         name:
             {
                 english:"Common Green Magpie",
-                indonesian:"Ekek Geling",
-                latin:"Cissa thalassina",                
+                indonesian:"Ekek Geling Layongan",
+                latin:"Cissa chinensis",                
             },
         image:"",
         audio:"",
-        iucn:["Least Concerned",""],
+        iucn:["Least Concerned","Berisiko Rendah"],
         cites:["Not Listed","Tidak Terdaftar"],
         indoprotect:["Not Protected","Tidak Dilindungi"],
         desc:[[
             "The Common Green Magpie is a fascinating case of how similar species can be difficult to tell apart and how the taxonomic lumping of these species obscured the decline one had faced. Sicily observed this species in certain markets. Traders were either quick to say it was not the Javan Green Magpie or the bird was out of sight, at the back of shops, or shown on the lowest level of stacked cages, closest to the floor, away from eye level.",
             "It was only recognized as a separate species from its rare Javan counterpart in <a target='_blank' class='link-article' href='https://www.cambridge.org/core/services/aop-cambridge-core/content/view/AAC7BEEFE2C3CB4ADFDB9198A7AEC6BF/S0959270911000360a.pdf/biology_taxonomy_and_conservation_status_of_the_shorttailed_green_magpie_cissa_t_thalassina_from_java.pdf'>2013</a>. By then, the numbers of the Javan Green Magpie had already dropped precipitously. A conservation breeding program was rapidly established to ensure there were at least populations in captivity from which to draw from for future conservation. "
         ],[
-            "Burung murai hijau merupakan sebuah kasus menarik tentang bagaimana spesies serupa sulit dibedakan dan bagaimana penggabungan spesies-spesies ini mengaburkan penurunan populasi atau kesehatan yang pernah dialami. Sicily mengamati spesies ini di beberapa pasar. Para pedagang langsung mengatakan bahwa burung tersebut bukan Ekek Geling Jawa, atau burung tersebut tidak terlihat, berada di belakang toko, atau berada di tumpukan sangkar paling bawah, paling dekat dengan lantai, jauh dari ketinggian mata.",
+            "Ekek Geling Layongan merupakan sebuah kasus menarik tentang bagaimana spesies serupa sulit dibedakan dan bagaimana penggabungan spesies-spesies ini mengaburkan penurunan populasi atau kesehatan yang pernah dialami. Sicily mengamati spesies ini di beberapa pasar. Para pedagang langsung mengatakan bahwa burung tersebut bukan Ekek Geling Jawa, atau burung tersebut tidak terlihat, berada di belakang toko, atau berada di tumpukan sangkar paling bawah, paling dekat dengan lantai, jauh dari ketinggian mata.",
             "Ia baru dikenali sebagai spesies terpisah dari spesies langka di Jawa pada tahun <a target='_blank' class='link-article' href='https://www.cambridge.org/core/services/aop-cambridge-core/content/view/AAC7BEEFE2C3CB4ADFDB9198A7AEC6BF/S0959270911000360a.pdf/biology_taxonomy_and_conservation_status_of_the_shorttailed_green_magpie_cissa_t_thalassina_from_java.pdf'>2013</a>. Saat itu, jumlah Ekek Geling Jawa sudah menurun drastis. Program pembiakan konservasi dengan cepat dilakukan untuk memastikan setidaknya terdapat populasi di penangkaran yang dapat diambil."
         ]]
 

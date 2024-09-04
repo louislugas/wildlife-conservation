@@ -51,7 +51,7 @@
         </h2>
         <p>Through this collaborative work of art and science, we want to challenge the misconceptions about the illegal wildlife trade and the people involved. Why do people cage birds and is the appropriate response to the problem of wildlife trade in turn to cage humans in the form of incarceration?</p>
 
-        <p>Immerse yourself in the website and experience what it is like to be in a bird market in Indonesia. Use your mouse to scroll through the website to encounter various species of birds. You can click on the birds to read more information and see additional pictures and recordings. Because of how rare some of these birds are,some do not have corresponding recordings. But you can still hear the ambient sounds of the market on the main page.</p>
+        <p>Immerse yourself in the website and experience what it is like to be in a bird market in Indonesia. Use your mouse to scroll through the website to encounter various species of birds. You can click on the birds to read more information and see additional pictures and recordings. Because of how rare some of these birds are, some do not have corresponding recordings. But you can still hear the ambient sounds of the market on the main page.</p>
         {:else}
         <h2>
             Selamat Datang
